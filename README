@@ -1,0 +1,5 @@
+php.ini openssl
+php.ini curl
+
+config must be loaded first
+config adapter must be 'config'

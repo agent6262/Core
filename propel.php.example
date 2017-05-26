@@ -1,0 +1,51 @@
+<?php
+return [
+    'propel' => [
+        'database' => [
+            'connections' => [
+                'connection_name' => [
+                    'adapter'      => 'mysql',
+                    'classname'    => 'Propel\Runtime\Connection\ConnectionWrapper',
+                    'dsn'          => 'mysql:host=localhost;dbname=my_db_name',
+                    'user'         => 'my_db_user',
+                    'password'     => 's3cr3t',
+                    'attributes'   => [],
+                    'settings'     => [
+                        'charset'  => 'utf8',
+                        'queries'  => [
+                            'utf8' => 'SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci'
+                        ]
+                    ]
+                ],
+                'connection_name_remote' => [
+                    'adapter'      => 'mysql',
+                    'classname'    => 'Propel\Runtime\Connection\ConnectionWrapper',
+                    'dsn'          => 'mysql:host=localhost;dbname=my_db_name',
+                    'user'         => 'my_db_user',
+                    'password'     => 's3cr3t',
+                    'attributes'   => [],
+                    'settings'     => [
+                        'charset'  => 'utf8',
+                        'queries'  => [
+                            'utf8' => 'SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci'
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'runtime' => [
+            'defaultConnection' => 'connection_name',
+            'connections' => ['connection_name'],
+            'log' => [
+                'defaultLogger' => [
+                    'type' => 'stream',
+                    'path' => 'propel.log'
+                ]
+            ]
+        ],
+        'generator' => [
+            'defaultConnection' => 'connection_name_remote',
+            'connections' => ['connection_name', 'connection_name_remote']
+        ]
+    ]
+];
