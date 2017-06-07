@@ -1,5 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
-/composer.lock
 /vendor/
 /.idea/
-/composer.phar
+.DS_Store

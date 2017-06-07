@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Class Template Contains HTML code and some php for the rendered page.
+ * Class Template Contains HTML code and some PHP for the rendered page.
  *
  * Documented and edited by agent6262
- * @Authors probably spidEY, agent6262
+ * @Authors spidEY, agent6262
  */
 class Template {
 
@@ -19,7 +19,7 @@ class Template {
     private $templateStyle;
 
     /**
-     * @var mixed[] Contains a list of variables to use in side of the template file.
+     * @var mixed[] Contains a list of variables to use inside of the template file.
      */
     public $args = array();
 
@@ -38,7 +38,7 @@ class Template {
 
     /**
      * @param string $name       The name of the viable.
-     * @return mixed|null|string The variable if it exists.
+     * @return mixed|null The variable if it exists.
      */
     public function __get(string $name) {
         if (array_key_exists($name, $this->args)) {
@@ -49,7 +49,7 @@ class Template {
 
     /**
      * @param string $name The name of the variable.
-     * @return bool if the viable is set.
+     * @return bool true if the viable is set.
      */
     public function __isset(string $name) {
         return isset($this->args[$name]);

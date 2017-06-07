@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class UtilityController
+ * Class ControllerUtility Contains functions which are specific utility functions for controllers.
  */
-class UtilityController {
+class ControllerUtility {
 
     /**
      * @var int Represents the call to a user defined location.
@@ -34,18 +34,18 @@ class UtilityController {
      * Attempts to load a controller with a given name.
      *
      * @param string $controllerName         The name of the controller.
-     * @param string $controllerPath         The path to the controller.
-     * @param string $templatePath           The path to the corresponding template.
      * @param AdapterManager $adapterManager The AdapterManager that will be passed to the controller.
      * @param string $templateStyle          The name of the template style to use.
      * @param string $skinStyle              The name of the skin style to use.
+     * @param string $controllerPath         The path to the controller.
+     * @param string $templatePath           The path to the corresponding template.
      * @return Controller|null The found controller or null if it was not present.
      *
      * @throws Exception
      *              If the a controller with the given name does not exist.
      *              If The controller does not extend Controller and does not implement ControllerInterface.
      */
-    public static function loadController(string $controllerName, string $controllerPath = "controllers/", $templatePath = "templates/", AdapterManager $adapterManager, string $templateStyle, string $skinStyle) {
+    public static function loadController(string $controllerName, AdapterManager $adapterManager, string $templateStyle, string $skinStyle, string $controllerPath = "controllers/", $templatePath = "templates/") {
         // Check to see if the controller exists before including it
         if (file_exists($controllerPath . $controllerName . ".php")) {
             include_once $controllerPath . $controllerName . ".php";

@@ -1,8 +1,6 @@
 <?php
 
 /**
- * Interface AdapterInterface
- *
  * All adapters must implement this interface in order to be used.
  */
 interface AdapterInterface {
@@ -56,7 +54,7 @@ class AdapterManager {
      * @param array $parameters   Extra parameters to pass to the adapter.
      * @return AdapterInterface The registered adapter.
      *
-     * @throws Exception
+     * @throws Exception if:
      *          Adapter is already registered.
      *          Adapter is not found.
      *          Adapter does not implement AdapterInterface.
@@ -101,11 +99,12 @@ class AdapterManager {
     }
 
     /**
+     * Return adapter if it exists else return null
+     *
      * @param string $adapterName The name of the adapter.
      * @return mixed|null         The registered adapter or null if not found.
      */
     public function getAdapter(string $adapterName) {
-        // Return adapter if it exists else return null
         if (array_key_exists($adapterName, $this->adapters)) {
             return $this->adapters[$adapterName];
         }
@@ -113,7 +112,8 @@ class AdapterManager {
     }
 
     /**
-     * Creates a temporary Adapter on the fly. Helps to make more then one adapter of the same type.
+     * Creates a temporary Adapter on the fly. Can be used to make more then one adapter of the same type (A / The
+     * regular adapter must be registered first before attempting to get an additional copy).
      *
      * @param string $adapterName The name of the adapter.
      * @param array $parameters   Extra parameters to pass to the adapter.

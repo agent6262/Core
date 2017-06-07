@@ -3,3 +3,79 @@ php.ini curl
 
 config must be loaded first
 config adapter must be 'config'
+
+<?php
+return array (
+    // This will enable the web / webpage portion of core.
+    'useWeb'               => false,
+    // Should php display errors on the web page
+    'displayErrors'        => false,
+    // Should php log the errors
+    'logErrors'            => true,
+    // The prefix for all cookies created and used by the app (including the ones in the core module)
+    'cookiePrefix'         => 'core',
+    // The index name for the session
+    'sessionIndex'         => 'cstorage',
+    // The name of the session that will be created for the app.
+    'sessionName'          => 'core_session',
+    // Name of the cookie that will hold the name of the template
+    'templateCookie'       => 'template',
+    // Default template style to use
+    'defaultTemplateStyle' => 'default',
+    // Name of the cookie that will hold the name of the skin
+    'skinCookie'           => 'skin',
+    // Default skin style to use
+    'defaultSkinStyle'     => 'default',
+);
+
+<?php
+return [
+    'propel' => [
+        'database' => [
+            'connections' => [
+                'connection_name' => [
+                    'adapter'      => 'mysql',
+                    'classname'    => 'Propel\Runtime\Connection\ConnectionWrapper',
+                    'dsn'          => 'mysql:host=localhost;dbname=my_db_name',
+                    'user'         => 'my_db_user',
+                    'password'     => 's3cr3t',
+                    'attributes'   => [],
+                    'settings'     => [
+                        'charset'  => 'utf8',
+                        'queries'  => [
+                            'utf8' => 'SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci'
+                        ]
+                    ]
+                ],
+                'connection_name_remote' => [
+                    'adapter'      => 'mysql',
+                    'classname'    => 'Propel\Runtime\Connection\ConnectionWrapper',
+                    'dsn'          => 'mysql:host=localhost;dbname=my_db_name',
+                    'user'         => 'my_db_user',
+                    'password'     => 's3cr3t',
+                    'attributes'   => [],
+                    'settings'     => [
+                        'charset'  => 'utf8',
+                        'queries'  => [
+                            'utf8' => 'SET NAMES utf8 COLLATE utf8_unicode_ci, COLLATION_CONNECTION = utf8_unicode_ci, COLLATION_DATABASE = utf8_unicode_ci, COLLATION_SERVER = utf8_unicode_ci'
+                        ]
+                    ]
+                ]
+            ]
+        ],
+        'runtime' => [
+            'defaultConnection' => 'connection_name',
+            'connections' => ['connection_name'],
+            'log' => [
+                'defaultLogger' => [
+                    'type' => 'stream',
+                    'path' => 'propel.log'
+                ]
+            ]
+        ],
+        'generator' => [
+            'defaultConnection' => 'connection_name_remote',
+            'connections' => ['connection_name', 'connection_name_remote']
+        ]
+    ]
+];

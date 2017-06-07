@@ -1,8 +1,7 @@
 <?php
-defined('CORE_ROOT') or die();
 
 /**
- * Class StorageAdapter
+ * Class StorageAdapter Creates and manages different types of storage for php.
  */
 class StorageAdapter implements AdapterInterface {
 
@@ -22,12 +21,16 @@ class StorageAdapter implements AdapterInterface {
     public $session;
 
     /**
-     * StorageAdapter constructor.
-     *
      * @param array $parameters              The parameters to construct this object.
      * @param AdapterManager $adapterManager The adapter (passed to sub storage objects).
+     *
+     * @throws Exception If the parameters for the StorageAdapter does not contains 'name'.
      */
     public function __construct(array $parameters, AdapterManager $adapterManager) {
+        // Validate array
+        if(!GeneralUtility::validateArray($parameters, array('name'))) {
+            throw new Exception('The parameters for the StorageAdapter does not contains \'name\'');
+        }
         // Set name name for sub storage
         $this->name = $parameters['name'];
         // Init sub storage
@@ -36,10 +39,30 @@ class StorageAdapter implements AdapterInterface {
     }
 }
 
+interface StorageInterface {
+
+    /**
+     * @param string $identifier Name of the key for where the data will go.
+     * @param mixed $data        The data to store in the session.
+     */
+    public function setData(string $identifier, mixed $data);
+
+    /**
+     * @param string $identifier The key used to get the data from the session.
+     * @return mixed|null If the key exists in the sub session.
+     */
+    public function getData(string $identifier);
+
+    /**
+     * @param string $identifier The key used to unset the data from the session.
+     */
+    public function destroyData(string $identifier);
+}
+
 /**
  * Class SessionStorage Creates and manages the session.
  */
-class SessionStorage {
+class SessionStorage implements StorageInterface {
 
     /**
      * @var string The session index name.
@@ -77,7 +100,7 @@ class SessionStorage {
         // Name the php session
         session_name($this->sessionName);
         // Create the php session if one does not exist
-        if(session_status() == PHP_SESSION_NONE){
+        if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
         // Set session fields up if they are not already set
@@ -123,9 +146,7 @@ class SessionStorage {
      * @param string $identifier The key used to unset the data from the session.
      */
     public function destroyData(string $identifier) {
-        if (isset($_SESSION[$this->sessionIndex][$this->name][$identifier])) {
-            unset($_SESSION[$this->sessionIndex][$this->name][$identifier]);
-        }
+        unset($_SESSION[$this->sessionIndex][$this->name][$identifier]);
     }
 
     /**
@@ -143,7 +164,7 @@ class SessionStorage {
 /**
  * Class CookieStorage Creates and gets cookies.
  */
-class CookieStorage {
+class CookieStorage implements StorageInterface {
 
     /**
      * @var string The secondary name of the cookie.
@@ -168,9 +189,9 @@ class CookieStorage {
 
     /**
      * @param string $identifier The cookie postfix.
-     * @param string $data       The cookie data.
+     * @param mixed $data       The cookie data.
      */
-    public function setData(string $identifier, string $data) {
+    public function setData(string $identifier, mixed $data) {
         // http://php.net/manual/en/function.setcookie.php
         setcookie("{$this->prefix}_{$this->name}_$identifier", $data, time() + (3600 * 24 * 7), null, null, null, true);
     }

@@ -55,13 +55,13 @@ class Core {
         ini_set('display_errors', $configAdapter->displayErrors);
         // Require web module files
         require_once 'controller.class.php';
-        require_once 'HTMLComponent.class.php';
+        require_once 'HtmlComponent.class.php';
         require_once 'template.class.php';
         // For the few pages that use date/time functions
         date_default_timezone_set($configAdapter->defaultTimezone);
         // Set default values if a new session is created
         if ($storageAdapter->session->justCreated) {
-            $storageAdapter->session->setData('token', UtilityAdapter::generateToken(32));
+            $storageAdapter->session->setData('token', GeneralUtility::generateToken(32));
         }
         return true;
     }
@@ -82,7 +82,7 @@ class Core {
         $skinStyle = $storageAdapter->cookies->getData($configAdapter->skinCookie);
         $skinStyle = isset($skinStyle) ? $skinStyle : $configAdapter->defaultSkinStyle;
         // Load controller
-        return UtilityAdapter::loadController($userRequest, $adapterManager, $templateStyle, $skinStyle);
+        return ControllerUtility::loadController($userRequest, $adapterManager, $templateStyle, $skinStyle);
     }
 
     /**
@@ -93,10 +93,10 @@ class Core {
      */
     public static function checkPost(Controller $controller, StorageAdapter $storageAdapter) {
         // Get form post token
-        $postToken = UtilityAdapter::getFormData('token', UtilityAdapter::FORM_POST);
+        $postToken = ControllerUtility::getFormData('token', ControllerUtility::FORM_POST);
         // Check if the post token matches the one in the session
         if (($postToken == $storageAdapter->session->getData('token'))) {
-            $post = UtilityAdapter::buildControllerPost($controller->controllerPostData);
+            $post = ControllerUtility::buildControllerPost($controller->getControllerPostData());
             $controller->onPostReceived($post);
         }
     }
@@ -109,10 +109,10 @@ class Core {
      */
     public static function callControllerUserAction(Controller $controller, StorageAdapter $storageAdapter) {
         // Get and check the user action
-        $userAction = UtilityAdapter::getFormData('action', UtilityAdapter::FORM_GET);
+        $userAction = ControllerUtility::getFormData('action', ControllerUtility::FORM_GET);
         if ($userAction != null) {
             // Get form get token
-            $getToken = UtilityAdapter::getFormData('token', UtilityAdapter::FORM_GET);
+            $getToken = ControllerUtility::getFormData('token', ControllerUtility::FORM_GET);
             // Check if the get token matches the one in the session
             if (($getToken == $storageAdapter->session->getData('token'))) {
                 $controller->onUserAction(strtolower($userAction));
@@ -127,7 +127,7 @@ class Core {
      */
     public static function callControllerAjax(Controller $controller) {
         // Execute the ajax function for the given controller
-        $request = UtilityAdapter::getFormData('request', UtilityAdapter::FORM_GET);
+        $request = ControllerUtility::getFormData('request', ControllerUtility::FORM_GET);
         $controller->ajax($request);
     }
 
@@ -140,3 +140,8 @@ class Core {
         $controller->main();
     }
 }
+?>
+<?php
+    session_start();
+    echo $_SESSION['test']['test2']['test3'];
+?>

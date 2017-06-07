@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Interface ControllerInterface
- *
- * @Authors probably spidEY, agent6262
+ * @Authors spidEY, agent6262
  */
 interface ControllerInterface {
     public function __construct(AdapterManager $adapterManager, $templateStyle, $skinStyle);
@@ -20,42 +18,42 @@ class Controller {
     /**
      * @var string The title of the controller.
      */
-    public $controllerTitle = 'Default Page';
+    private $controllerTitle = 'Default Page';
 
     /**
      * @var int The tab index of the controller. Only used if there are tabs on the page.
      */
-    public $controllerTabIndex  = 0;
+    private $controllerTabIndex  = 0;
 
     /**
-     * @var mixed[] An array of data posted to the controller from the template.
+     * @var string[] An array of all the valid keys that can be present in the parameter passed to the onPostReceived(array) method.
      */
-    public $controllerPostData = array();
+    private $controllerPostData = array();
 
     /**
      * @var string The desired template style of the template.
      */
-    public $templateStyle;
+    private $templateStyle;
 
     /**
      * @var string The desired skin style of the template.
      */
-    public $templateSkin;
+    private $templateSkin;
 
     /**
      * @var Template The controllers associating template object.
      */
-    public $template;
+    private $template;
 
     /**
      * @var HTMLComponent[] The array of input components that are accepted by the controller.
      */
-    public $components = array();
+    private $components = array();
 
     /**
      * @var string The base url of the controller.
      */
-    public $baseUrl;
+    private $baseUrl;
 
     /**
      * Controller constructor.
@@ -79,6 +77,120 @@ class Controller {
         } else {
             throw new Exception("Template of '$templateName' not found.");
         }
+    }
+
+    /**
+     * @return string The title of the controller.
+     */
+    public function getControllerTitle() {
+        return $this->controllerTitle;
+    }
+
+    /**
+     * @param string $controllerTitle The title of the controller.
+     */
+    public function setControllerTitle(string $controllerTitle) {
+        $this->controllerTitle = $controllerTitle;
+    }
+
+    /**
+     * @return int The tab index of the controller. Only used if there are tabs on the page.
+     */
+    public function getControllerTabIndex() {
+        return $this->controllerTabIndex;
+    }
+
+    /**
+     * @param int $controllerTabIndex The tab index of the controller. Only used if there are tabs on the page.
+     */
+    public function setControllerTabIndex(int $controllerTabIndex) {
+        $this->controllerTabIndex = $controllerTabIndex;
+    }
+
+    /**
+     * @return string[] An array of all the valid keys that can be present in the parameter passed to the
+     * onPostReceived(array) method.
+     */
+    public function getControllerPostData() {
+        return $this->controllerPostData;
+    }
+
+    /**
+     * @param string[] $controllerPostData An array of all the valid keys that can be present in the parameter passed
+     * to the onPostReceived(array) method.
+     */
+    public function setControllerPostData(array $controllerPostData) {
+        $this->controllerPostData = $controllerPostData;
+    }
+
+    /**
+     * @return string The desired template style of the template.
+     */
+    public function getTemplateStyle() {
+        return $this->templateStyle;
+    }
+
+    /**
+     * @param string $templateStyle The desired template style of the template.
+     */
+    public function setTemplateStyle(string $templateStyle) {
+        $this->templateStyle = $templateStyle;
+    }
+
+    /**
+     * @return string The desired skin style of the template.
+     */
+    public function getTemplateSkin() {
+        return $this->templateSkin;
+    }
+
+    /**
+     * @param string $templateSkin The desired skin style of the template.
+     */
+    public function setTemplateSkin(string $templateSkin) {
+        $this->templateSkin = $templateSkin;
+    }
+
+    /**
+     * @return Template The controllers associating template object.
+     */
+    public function getTemplate() {
+        return $this->template;
+    }
+
+    /**
+     * @param Template $template The controllers associating template object.
+     */
+    public function setTemplate(Template $template) {
+        $this->template = $template;
+    }
+
+    /**
+     * @return HTMLComponent[] The array of input components that are accepted by the controller.
+     */
+    public function getComponents() {
+        return $this->components;
+    }
+
+    /**
+     * @param HTMLComponent[] $components The array of input components that are accepted by the controller.
+     */
+    public function setComponents(array $components) {
+        $this->components = $components;
+    }
+
+    /**
+     * @return string The base url of the controller.
+     */
+    public function getBaseUrl() {
+        return $this->baseUrl;
+    }
+
+    /**
+     * @param string $baseUrl The base url of the controller.
+     */
+    public function setBaseUrl(string $baseUrl) {
+        $this->baseUrl = $baseUrl;
     }
 
     /**
