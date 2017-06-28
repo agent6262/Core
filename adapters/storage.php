@@ -24,12 +24,12 @@ class StorageAdapter implements AdapterInterface {
      * @param array $parameters              The parameters to construct this object.
      * @param AdapterManager $adapterManager The adapter (passed to sub storage objects).
      *
-     * @throws Exception If the parameters for the StorageAdapter does not contains 'name'.
+     * @throws Exception If the parameters for the StorageAdapter does not contain 'name'.
      */
     public function __construct(array $parameters, AdapterManager $adapterManager) {
         // Validate array
-        if(!GeneralUtility::validateArray($parameters, array('name'))) {
-            throw new Exception('The parameters for the StorageAdapter does not contains \'name\'');
+        if (!GeneralUtility::validateArray($parameters, array('name'))) {
+            throw new Exception('The parameters for the StorageAdapter does not contain \'name\'');
         }
         // Set name name for sub storage
         $this->name = $parameters['name'];
@@ -189,7 +189,7 @@ class CookieStorage implements StorageInterface {
 
     /**
      * @param string $identifier The cookie postfix.
-     * @param mixed $data       The cookie data.
+     * @param mixed $data        The cookie data.
      */
     public function setData(string $identifier, mixed $data) {
         // http://php.net/manual/en/function.setcookie.php

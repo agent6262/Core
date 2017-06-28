@@ -10,7 +10,7 @@ class Core {
     /**
      * Require all files for core to function. Also define CORE_ROOT.
      */
-    public static function require() {
+    public static function require () {
         // Define Core root to force the loading of controllers through the index.php
         define('CORE_ROOT', 1);
         // Load project specific constants (i.e. permissions | Log IDs | States)
@@ -18,6 +18,12 @@ class Core {
         // Load the use of adapters for foreign projects
         require_once 'adapter.class.php';
     }
+}
+
+/**
+ * @Author agent6262
+ */
+class Web {
 
     /**
      * Registers all internal core adapters. Adapter must be initialized first along with the config adapter.
@@ -56,7 +62,7 @@ class Core {
         // Require web module files
         require_once 'controller.class.php';
         require_once 'HtmlComponent.class.php';
-        require_once 'template.class.php';
+        require_once 'Template.class.php';
         // For the few pages that use date/time functions
         date_default_timezone_set($configAdapter->defaultTimezone);
         // Set default values if a new session is created
@@ -140,8 +146,36 @@ class Core {
         $controller->main();
     }
 }
-?>
-<?php
-    session_start();
-    echo $_SESSION['test']['test2']['test3'];
-?>
+
+/**
+ * @Author agent6262
+ */
+class API {
+
+    /**
+     * @param ConfigAdapter $configAdapter The registered configuration adapter.
+     * @return bool True if the api module is enabled false otherwise.
+     */
+    public static function initApiModule(ConfigAdapter $configAdapter) {
+        // Check to make sure web module is enabled
+        if (!$configAdapter->useApi) {
+            return false;
+        }
+        // Define the web module and error displaying
+        define('CORE_API', 1);
+        // Set error logging before anything else
+        ini_set('log_errors', $configAdapter->logErrors);
+        // Require api module files
+        require_once 'api.class.php';
+        // For the few pages that use date/time functions
+        date_default_timezone_set($configAdapter->defaultTimezone);
+        return true;
+    }
+
+    /**
+     * @return array The array of URL arguments.
+     */
+    public static function getUrlArguments() {
+        return explode('/', $_REQUEST['request']);
+    }
+}

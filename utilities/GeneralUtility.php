@@ -14,18 +14,6 @@
 class GeneralUtility {
 
     /**
-     * @return bool True if a database connection can be successfully established false otherwise.
-     */
-    public static function checkDatabaseConnection() {
-        try {
-            \Propel\Runtime\Propel::getConnection();
-            return true;
-        } catch (Exception $e) {
-            return false;
-        }
-    }
-
-    /**
      * @param int $length The length of the random string that should be returned in bytes.
      * @return string A string containing the requested number of cryptographically secure random bytes in hex.
      */
@@ -53,7 +41,7 @@ class GeneralUtility {
      */
     public static function validateArray(array $array, array $keyCheck) {
         foreach ($keyCheck as $key) {
-            if(!array_key_exists($key, $array)) {
+            if (!array_key_exists($key, $array)) {
                 return false;
             }
         }

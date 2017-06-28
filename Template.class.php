@@ -49,7 +49,7 @@ class Template {
 
     /**
      * @param string $name The name of the variable.
-     * @return bool true if the viable is set.
+     * @return bool true if the variable is set.
      */
     public function __isset(string $name) {
         return isset($this->args[$name]);

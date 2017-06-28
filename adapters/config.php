@@ -11,6 +11,7 @@
  * @property mixed|null logErrors
  * @property mixed|null skinCookie
  * @property mixed|null templateCookie
+ * @property mixed|null useApi
  * @property mixed|null useWeb
  */
 class ConfigAdapter implements AdapterInterface {
@@ -36,6 +37,7 @@ class ConfigAdapter implements AdapterInterface {
         'logErrors',
         'skinCookie',
         'templateCookie',
+        'useApi',
         'useWeb'
     );
 
