@@ -33,14 +33,14 @@ class ControllerUtility {
     /**
      * Attempts to load a controller with a given name.
      *
-     * @param string $controllerName         The name of the controller.
+     * @param string         $controllerName The name of the controller.
      * @param AdapterManager $adapterManager The AdapterManager that will be passed to the controller.
-     * @param string $templateStyle          The name of the template style to use.
-     * @param string $skinStyle              The name of the skin style to use.
-     * @param string $controllerPath         The path to the controller.
-     * @param string $templatePath           The path to the corresponding template.
-     * @return Controller|null The found controller or null if it was not present.
+     * @param string         $templateStyle  The name of the template style to use.
+     * @param string         $skinStyle      The name of the skin style to use.
+     * @param string         $controllerPath The path to the controller.
+     * @param string         $templatePath   The path to the corresponding template.
      *
+     * @return Controller|null The found controller or null if it was not present.
      * @throws Exception
      *              If the a controller with the given name does not exist.
      *              If The controller does not extend Controller and does not implement ControllerInterface.
@@ -60,8 +60,8 @@ class ControllerUtility {
             throw new Exception("Controller '$controllerName' doesn't exist.");
         }
         // Check to see if the controller implements the ControllerInterface
-        if (!$controller instanceof Controller && !$controller instanceof ControllerInterface) {
-            throw new Exception('You can only load Controllers that implement the ControllerInterface.');
+        if (!$controller instanceof Controller) {
+            throw new Exception('You can only load Controllers that extend the Controller.');
         }
         // Return controller
         return $controller;
@@ -69,6 +69,7 @@ class ControllerUtility {
 
     /**
      * @param array $data The array of properties to get.
+     *
      * @return array The fetched array of properties. Can contain null items.
      */
     public static function buildControllerPost(array $data) {
@@ -81,7 +82,8 @@ class ControllerUtility {
 
     /**
      * @param string $property the name of the property to fetch.
-     * @param int $method The get or post function to use.
+     * @param int    $method   The get or post function to use.
+     *
      * @return null if the given property is not set or an invalid method was passed.
      */
     public static function getFormData(string $property, int $method) {
@@ -94,8 +96,8 @@ class ControllerUtility {
     }
 
     /**
-     * @param string|null $url The url to redirect to.
-     * @param int $type The type of redirect to preform.
+     * @param string|null $url  The url to redirect to.
+     * @param int         $type The type of redirect to preform.
      */
     public static function redirect($url = null, $type = self::REDIRECT_NORMAL) {
         if ($type == self::REDIRECT_REFERRER) {

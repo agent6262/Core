@@ -21,7 +21,7 @@ class StorageAdapter implements AdapterInterface {
     public $session;
 
     /**
-     * @param array $parameters              The parameters to construct this object.
+     * @param array          $parameters     The parameters to construct this object.
      * @param AdapterManager $adapterManager The adapter (passed to sub storage objects).
      *
      * @throws Exception If the parameters for the StorageAdapter does not contain 'name'.
@@ -43,12 +43,13 @@ interface StorageInterface {
 
     /**
      * @param string $identifier Name of the key for where the data will go.
-     * @param mixed $data        The data to store in the session.
+     * @param mixed  $data       The data to store in the session.
      */
-    public function setData(string $identifier, mixed $data);
+    public function setData(string $identifier, $data);
 
     /**
      * @param string $identifier The key used to get the data from the session.
+     *
      * @return mixed|null If the key exists in the sub session.
      */
     public function getData(string $identifier);
@@ -87,7 +88,7 @@ class SessionStorage implements StorageInterface {
     /**
      * CookieStorage constructor.
      *
-     * @param string $name                   The sub name of the session.
+     * @param string         $name           The sub name of the session.
      * @param AdapterManager $adapterManager The adapter (used to get session index).
      */
     public function __construct(string $name, AdapterManager $adapterManager) {
@@ -125,14 +126,15 @@ class SessionStorage implements StorageInterface {
 
     /**
      * @param string $identifier Name of the key for where the data will go.
-     * @param mixed $data        The data to store in the session.
+     * @param mixed  $data       The data to store in the session.
      */
-    public function setData(string $identifier, mixed $data) {
+    public function setData(string $identifier, $data) {
         $_SESSION[$this->sessionIndex][$this->name][$identifier] = $data;
     }
 
     /**
      * @param string $identifier The key used to get the data from the session.
+     *
      * @return mixed|null If the key exists in the sub session.
      */
     public function getData(string $identifier) {
@@ -179,7 +181,7 @@ class CookieStorage implements StorageInterface {
     /**
      * CookieStorage constructor.
      *
-     * @param string $name                   The secondary name of the cookie.
+     * @param string         $name           The secondary name of the cookie.
      * @param AdapterManager $adapterManager The adapter (used to get cookie prefix)
      */
     public function __construct(string $name, AdapterManager $adapterManager) {
@@ -189,15 +191,16 @@ class CookieStorage implements StorageInterface {
 
     /**
      * @param string $identifier The cookie postfix.
-     * @param mixed $data        The cookie data.
+     * @param mixed  $data       The cookie data.
      */
-    public function setData(string $identifier, mixed $data) {
+    public function setData(string $identifier, $data) {
         // http://php.net/manual/en/function.setcookie.php
         setcookie("{$this->prefix}_{$this->name}_$identifier", $data, time() + (3600 * 24 * 7), null, null, null, true);
     }
 
     /**
      * @param string $identifier The cookie postfix.
+     *
      * @return mixed|null The cookie if null if it is not set.
      */
     public function getData(string $identifier) {
@@ -212,7 +215,7 @@ class CookieStorage implements StorageInterface {
      */
     public function destroyData(string $identifier) {
         if (isset($_COOKIE["{$this->prefix}_{$this->name}_$identifier"])) {
-            //http://php.net/manual/en/function.setcookie.php
+            // http://php.net/manual/en/function.setcookie.php
             setcookie("{$this->prefix}_{$this->name}_$identifier", false, 1, null, null, null, true);
         }
     }

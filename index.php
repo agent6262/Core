@@ -2,7 +2,6 @@
 
 /**
  * Class Core A static class that should be called from the project level index.php.
- *
  * @Author agent6262
  */
 class Core {
@@ -16,7 +15,12 @@ class Core {
         // Load project specific constants (i.e. permissions | Log IDs | States)
         require_once 'constants.php';
         // Load the use of adapters for foreign projects
-        require_once 'adapter.class.php';
+        require_once 'AdapterManager.class.php';
+        // Load the constants file
+        require_once 'constants.php';
+        // Load Utility classes
+        require_once 'utilities/GeneralUtility.class.php';
+        require_once 'utilities/CslUtility.class.php';
     }
 }
 
@@ -28,7 +32,7 @@ class Web {
     /**
      * Registers all internal core adapters. Adapter must be initialized first along with the config adapter.
      *
-     * @param ConfigAdapter $configAdapter   The registered configuration adapter.
+     * @param ConfigAdapter  $configAdapter  The registered configuration adapter.
      * @param AdapterManager $adapterManager The adapter register.
      *
      * @throws Exception If the config adapter is not registered.
@@ -47,8 +51,9 @@ class Web {
     /**
      * Attempts to initialize the web module for Core.
      *
-     * @param ConfigAdapter $configAdapter   The registered configuration adapter.
+     * @param ConfigAdapter  $configAdapter  The registered configuration adapter.
      * @param StorageAdapter $storageAdapter The registered storage adapter.
+     *
      * @return bool True If the useWeb is enabled in the config false otherwise.
      */
     public static function initWebModule(ConfigAdapter $configAdapter, StorageAdapter $storageAdapter) {
@@ -59,8 +64,10 @@ class Web {
         // Define the web module and error displaying
         define('CORE_WEB', 1);
         ini_set('display_errors', $configAdapter->displayErrors);
+        // Load Utility classes
+        require_once 'utilities/ControllerUtility.class.php';
         // Require web module files
-        require_once 'controller.class.php';
+        require_once 'Controller.class.php';
         require_once 'HtmlComponent.class.php';
         require_once 'Template.class.php';
         // For the few pages that use date/time functions
@@ -75,10 +82,11 @@ class Web {
     /**
      * Attempts to load and return a controller based off of the $userRequest.
      *
-     * @param string $userRequest            The name of the requested controller (aka page).
-     * @param ConfigAdapter $configAdapter   The registered configuration adapter.
+     * @param string         $userRequest    The name of the requested controller (aka page).
+     * @param ConfigAdapter  $configAdapter  The registered configuration adapter.
      * @param StorageAdapter $storageAdapter The registered storage adapter.
      * @param AdapterManager $adapterManager The adapter register.
+     *
      * @return Controller|null If there is a valid controller for the users request, null otherwise.
      */
     public static function loadController(string $userRequest, ConfigAdapter $configAdapter, StorageAdapter $storageAdapter, AdapterManager $adapterManager) {
@@ -94,7 +102,7 @@ class Web {
     /**
      * Checks to see if there was a post sent to the controller.
      *
-     * @param Controller $controller         The loaded controller for the users request.
+     * @param Controller     $controller     The loaded controller for the users request.
      * @param StorageAdapter $storageAdapter The registered storage adapter.
      */
     public static function checkPost(Controller $controller, StorageAdapter $storageAdapter) {
@@ -110,7 +118,7 @@ class Web {
     /**
      * Checks to see if there was a 'userAction' sent to the controller.
      *
-     * @param Controller $controller         The loaded controller for the users request.
+     * @param Controller     $controller     The loaded controller for the users request.
      * @param StorageAdapter $storageAdapter The registered storage adapter.
      */
     public static function callControllerUserAction(Controller $controller, StorageAdapter $storageAdapter) {
@@ -154,6 +162,7 @@ class API {
 
     /**
      * @param ConfigAdapter $configAdapter The registered configuration adapter.
+     *
      * @return bool True if the api module is enabled false otherwise.
      */
     public static function initApiModule(ConfigAdapter $configAdapter) {
@@ -166,7 +175,7 @@ class API {
         // Set error logging before anything else
         ini_set('log_errors', $configAdapter->logErrors);
         // Require api module files
-        require_once 'api.class.php';
+        require_once 'RestApi.class.php';
         // For the few pages that use date/time functions
         date_default_timezone_set($configAdapter->defaultTimezone);
         return true;

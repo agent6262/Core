@@ -14,7 +14,6 @@ interface HandlerInterface {
 
 /**
  * Class RestApi Handles all RESTful api requests.
- *
  * @Author agent6262
  */
 class RestApi {
@@ -37,17 +36,18 @@ class RestApi {
     /**
      * @var bool|null|string Stores the input of the PUT request.
      */
-    protected $file = Null;
+    protected $file = null;
 
     /**
      * Allow for CORS, assemble and pre-process the data.
      *
      * @param $request array the URI request.
+     *
      * @throws Exception if there is an unexpected Header.
      */
     public function __construct(array $request) {
         // Header options
-        header("Access-Control-Allow-Orgin: *");
+        header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: *");
         header("Content-Type: application/json");
         // Set vars
@@ -71,8 +71,9 @@ class RestApi {
     }
 
     /**
-     * @param string $apiPath                The path to the api classes.
+     * @param string         $apiPath        The path to the api classes.
      * @param AdapterManager $adapterManager The adapter reference for the api endpoint.
+     *
      * @return string The json encoded data.
      */
     public function processAPI(string $apiPath = "api/", AdapterManager $adapterManager = null) {
@@ -97,8 +98,9 @@ class RestApi {
     }
 
     /**
-     * @param mixed $data The data to encode.
-     * @param int $status The status of the request.
+     * @param mixed $data   The data to encode.
+     * @param int   $status The status of the request.
+     *
      * @return string The json encoded data.
      */
     private function _response(mixed $data, $status = 200) {
@@ -108,6 +110,7 @@ class RestApi {
 
     /**
      * @param int $code HTTP response code.
+     *
      * @return string The HTTP string response.
      */
     private function _requestStatus(int $code) {

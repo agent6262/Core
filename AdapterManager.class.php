@@ -51,9 +51,9 @@ class AdapterManager {
      *
      * @param string $adapterName The name of the adapter.
      * @param string $adapterPath The path to the adapter.
-     * @param array $parameters   Extra parameters to pass to the adapter.
-     * @return AdapterInterface The registered adapter.
+     * @param array  $parameters  Extra parameters to pass to the adapter.
      *
+     * @return AdapterInterface The registered adapter.
      * @throws Exception if:
      *          Adapter is already registered.
      *          Adapter is not found.
@@ -89,8 +89,8 @@ class AdapterManager {
     /**
      * Register all internal core adapters.
      *
-     * @param string $path The path to the adapters.
-     * @param array $adapters List of adapters.
+     * @param string $path     The path to the adapters.
+     * @param array  $adapters List of adapters.
      */
     public function registerAdapters(string $path, array $adapters) {
         foreach ($adapters as $key => $value) {
@@ -102,6 +102,7 @@ class AdapterManager {
      * Return adapter if it exists else return null
      *
      * @param string $adapterName The name of the adapter.
+     *
      * @return mixed|null         The registered adapter or null if not found.
      */
     public function getAdapter(string $adapterName) {
@@ -116,7 +117,8 @@ class AdapterManager {
      * regular adapter must be registered first before attempting to get an additional copy).
      *
      * @param string $adapterName The name of the adapter.
-     * @param array $parameters   Extra parameters to pass to the adapter.
+     * @param array  $parameters  Extra parameters to pass to the adapter.
+     *
      * @return mixed|null The registered adapter or null if not found.
      */
     public function createTemporaryAdapter(string $adapterName, array $parameters = array()) {

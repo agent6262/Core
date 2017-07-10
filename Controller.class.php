@@ -1,15 +1,7 @@
 <?php
 
 /**
- * @Authors spidEY, agent6262
- */
-interface ControllerInterface {
-    public function __construct(AdapterManager $adapterManager, $templateStyle, $skinStyle);
-}
-
-/**
  * Class Controller The web controller for templates.
- *
  * Documented and edited by agent6262
  * @Authors probably spidEY, agent6262
  */
@@ -23,7 +15,7 @@ class Controller {
     /**
      * @var int The tab index of the controller. Only used if there are tabs on the page.
      */
-    private $controllerTabIndex  = 0;
+    private $controllerTabIndex = 0;
 
     /**
      * @var string[] An array of all the valid keys that can be present in the parameter passed to the onPostReceived(array) method.
@@ -59,14 +51,14 @@ class Controller {
      * Controller constructor.
      *
      * @param AdapterManager $adapterManager The adapter loading the controller.
-     * @param string $templateName           The name of the template file.
-     * @param string $templatePath           The path to the templates.
-     * @param string $templateStyle          The desired template style of the template.
-     * @param string $skinStyle              The desired skin style of the template.
+     * @param string         $templateName   The name of the template file.
+     * @param string         $templateStyle  The desired template style of the template.
+     * @param string         $skinStyle      The desired skin style of the template.
+     * @param string         $templatePath   The path to the templates.
      *
      * @throws Exception If the template file is not found.
      */
-    public function __construct(AdapterManager $adapterManager, string $templateName, string $templatePath = 'templates/', string $templateStyle, string $skinStyle) {
+    public function __construct(AdapterManager $adapterManager, string $templateName, string $templateStyle, string $skinStyle, string $templatePath = 'templates/') {
         // Set desired template and skin info
         $this->templateStyle = $templateStyle;
         $this->templateSkin = $skinStyle;
@@ -117,7 +109,7 @@ class Controller {
 
     /**
      * @param string[] $controllerPostData An array of all the valid keys that can be present in the parameter passed
-     * to the onPostReceived(array) method.
+     *                                     to the onPostReceived(array) method.
      */
     public function setControllerPostData(array $controllerPostData) {
         $this->controllerPostData = $controllerPostData;

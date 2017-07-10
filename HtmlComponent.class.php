@@ -2,7 +2,6 @@
 
 /**
  * Class HtmlComponent Provides a PHP Object-oriented way of constructing HTML elements.
- *
  * @Author agent6262
  */
 class HtmlComponent {
@@ -30,9 +29,9 @@ class HtmlComponent {
     /**
      * HTMLComponent constructor.
      *
-     * @param string $tag              The HTML element tag.
-     * @param array $attributes        The attributes for the HTML element.
-     * @param array $subHtmlComponents A list of sub HTML elements.
+     * @param string $tag               The HTML element tag.
+     * @param array  $attributes        The attributes for the HTML element.
+     * @param array  $subHtmlComponents A list of sub HTML elements.
      */
     public function __construct(string $tag, array $attributes = array(), array $subHtmlComponents = array()) {
         $this->tag = htmlspecialchars($tag);
@@ -62,8 +61,8 @@ class HtmlComponent {
     }
 
     /**
-     * @param string $key  The key of the attribute.
-     * @param mixed $value The value of the attribute for the HTML element.
+     * @param string $key   The key of the attribute.
+     * @param mixed  $value The value of the attribute for the HTML element.
      */
     public function setAttribute(string $key, mixed $value) {
         $this->attributes[$key] = htmlspecialchars($value);
@@ -114,7 +113,7 @@ class HtmlComponent {
         // Init HTML tag
         echo '<', $this->tag, ' ';
         foreach ($this->attributes as $key => $value) {
-            echo $key, '="',$value,'" ';
+            echo $key, '="', $value, '" ';
         }
         echo '>';
 
@@ -123,7 +122,8 @@ class HtmlComponent {
             echo $this->value;
         } else {
             // Print sub HTML components
-            foreach ($this->subHtmlComponents as /** @var HtmlComponent */ $subHtmlComponent) {
+            foreach ($this->subHtmlComponents as /** @var HtmlComponent */
+                     $subHtmlComponent) {
                 $subHtmlComponent->renderHTML();
             }
         }

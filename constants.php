@@ -14,6 +14,6 @@ abstract class AdapterList {
      * @var array The array of adapters that this library will load by default.
      */
     public static $adapters = array(
-        'storage' => array('name' => 'system')
+        'StorageAdapter.class' => array('name' => 'system')
     );
 }

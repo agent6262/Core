@@ -2,7 +2,6 @@
 
 /**
  * Class Template Contains HTML code and some PHP for the rendered page.
- *
  * Documented and edited by agent6262
  * @Authors spidEY, agent6262
  */
@@ -37,7 +36,8 @@ class Template {
     }
 
     /**
-     * @param string $name       The name of the viable.
+     * @param string $name The name of the viable.
+     *
      * @return mixed|null The variable if it exists.
      */
     public function __get(string $name) {
@@ -49,6 +49,7 @@ class Template {
 
     /**
      * @param string $name The name of the variable.
+     *
      * @return bool true if the variable is set.
      */
     public function __isset(string $name) {
@@ -56,8 +57,8 @@ class Template {
     }
 
     /**
-     * @param string $name Name of the key.
-     * @param mixed $value Value to be stored.
+     * @param string $name  Name of the key.
+     * @param mixed  $value Value to be stored.
      */
     public function setData(string $name, mixed $value) {
         $this->args[$name] = $value;
@@ -74,6 +75,7 @@ class Template {
 
     /**
      * @param string $name The name of the variable.
+     *
      * @return mixed|null If the key exists null if it does not.
      */
     public function displayRaw(string $name) {
