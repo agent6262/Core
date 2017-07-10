@@ -65,12 +65,12 @@ class AdapterManager {
             throw new Exception("Adapter '$adapterName' is already registered.");
         }
         // When registering a new adapter make sure the file exists
-        if (file_exists($adapterPath . $adapterName . ".php")) {
-            include $adapterPath . $adapterName . ".php";
+        if (file_exists($adapterPath . $adapterName . ".class.php")) {
+            include $adapterPath . $adapterName . ".class.php";
         }
         //Initialize the adapter and class name
         $adapter = null;
-        $className = $adapterName . "adapter";
+        $className = $adapterName;
         // Check to see adapter class exists inside of the file
         if (class_exists($className)) {
             $adapter = new $className($parameters, $this);

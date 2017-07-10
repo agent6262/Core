@@ -6,7 +6,7 @@
 class StorageAdapter implements AdapterInterface {
 
     /**
-     * @var string The name used in the sub storages.
+     * @var string The name used in the sub storage.
      */
     private $name;
 

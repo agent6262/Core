@@ -5,7 +5,7 @@
  * List of magic fields / properties that must be present.
  * @property string  defaultSkinStyle
  * @property string  defaultTemplateStyle
- * @property string  defaultTimezone
+ * @property string  defaultTimezoneOffset
  * @property boolean displayErrors
  * @property boolean logErrors
  * @property string  skinCookie
@@ -31,7 +31,7 @@ class ConfigAdapter implements AdapterInterface {
     private static $requiredProperties = array(
         'defaultSkinStyle',
         'defaultTemplateStyle',
-        'defaultTimezone',
+        'defaultTimezoneOffset',
         'displayErrors',
         'logErrors',
         'skinCookie',

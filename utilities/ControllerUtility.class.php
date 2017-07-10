@@ -47,12 +47,12 @@ class ControllerUtility {
      */
     public static function loadController(string $controllerName, AdapterManager $adapterManager, string $templateStyle, string $skinStyle, string $controllerPath = "controllers/", $templatePath = "templates/") {
         // Check to see if the controller exists before including it
-        if (file_exists($controllerPath . $controllerName . ".php")) {
-            include_once $controllerPath . $controllerName . ".php";
+        if (file_exists($controllerPath . $controllerName . ".class.php")) {
+            include_once $controllerPath . $controllerName . ".class.php";
         }
         // Initialize the controller and class name
         $controller = null;
-        $className = $controllerName . "controller";
+        $className = $controllerName;
         // Check to see if the controller class exists inside the file
         if (class_exists($className)) {
             $controller = new $className($adapterManager, $controllerName, $templatePath, $templateStyle, $skinStyle);

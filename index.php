@@ -9,7 +9,7 @@ class Core {
     /**
      * Require all files for core to function. Also define CORE_ROOT.
      */
-    public static function require () {
+    public static function initRequire() {
         // Define Core root to force the loading of controllers through the index.php
         define('CORE_ROOT', 1);
         // Load project specific constants (i.e. permissions | Log IDs | States)
@@ -71,7 +71,7 @@ class Web {
         require_once 'HtmlComponent.class.php';
         require_once 'Template.class.php';
         // For the few pages that use date/time functions
-        date_default_timezone_set($configAdapter->defaultTimezone);
+        date_default_timezone_set(timezone_name_from_abbr('', $configAdapter->defaultTimezoneOffset, false));
         // Set default values if a new session is created
         if ($storageAdapter->session->justCreated) {
             $storageAdapter->session->setData('token', GeneralUtility::generateToken(32));
@@ -177,7 +177,7 @@ class API {
         // Require api module files
         require_once 'RestApi.class.php';
         // For the few pages that use date/time functions
-        date_default_timezone_set($configAdapter->defaultTimezone);
+        date_default_timezone_set(timezone_name_from_abbr('', $configAdapter->defaultTimezoneOffset, false));
         return true;
     }
 
