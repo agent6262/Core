@@ -2,7 +2,8 @@
 
 /**
  * Class Core A static class that should be called from the project level index.php.
- * @Author agent6262
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 class Core {
 
@@ -16,8 +17,6 @@ class Core {
         require_once 'constants.php';
         // Load the use of adapters for foreign projects
         require_once 'AdapterManager.class.php';
-        // Load the constants file
-        require_once 'constants.php';
         // Load Utility classes
         require_once 'utilities/GeneralUtility.class.php';
         require_once 'utilities/CslUtility.class.php';
@@ -25,7 +24,9 @@ class Core {
 }
 
 /**
- * @Author agent6262
+ * The web portion of core.
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 class Web {
 
@@ -156,7 +157,9 @@ class Web {
 }
 
 /**
- * @Author agent6262
+ * The REST api portion of core.
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 class API {
 

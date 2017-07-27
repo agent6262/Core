@@ -2,6 +2,8 @@
 
 /**
  * Class StorageAdapter Creates and manages different types of storage for php.
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 class StorageAdapter implements AdapterInterface {
 

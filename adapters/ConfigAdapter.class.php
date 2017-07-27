@@ -12,6 +12,8 @@
  * @property string  templateCookie
  * @property boolean useApi
  * @property boolean useWeb
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 class ConfigAdapter implements AdapterInterface {
 

@@ -2,6 +2,8 @@
 
 /**
  * All adapters must implement this interface in order to be used.
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 interface AdapterInterface {
     public function __construct(array $parameters, AdapterManager $adapterManager);
@@ -10,6 +12,8 @@ interface AdapterInterface {
 /**
  * Adapters are used to interface with other applications that are not native to the project.
  * Used to register and get adapters. Note that this class is a singleton.
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 class AdapterManager {
 
@@ -49,7 +53,7 @@ class AdapterManager {
     /**
      * Registers an adapter to use later in the project.
      *
-     * @param string $adapterName The name of the adapter.
+     * @param string $className   The class name of the adapter.
      * @param string $adapterPath The path to the adapter.
      * @param array  $parameters  Extra parameters to pass to the adapter.
      *
@@ -59,18 +63,18 @@ class AdapterManager {
      *          Adapter is not found.
      *          Adapter does not implement AdapterInterface.
      */
-    public function registerAdapter(string $adapterName, string $adapterPath = "adapters/", array $parameters = array()) {
+    public function registerAdapter(string $className, string $adapterPath = "adapters/", array $parameters = array()) {
         // Check if adapterName is in the registered adapters list, if so throw Exception
+        $adapterName = $parameters['regName'];
         if (array_key_exists($adapterName, $this->adapters)) {
             throw new Exception("Adapter '$adapterName' is already registered.");
         }
         // When registering a new adapter make sure the file exists
-        if (file_exists($adapterPath . $adapterName . ".class.php")) {
-            include $adapterPath . $adapterName . ".class.php";
+        if (file_exists($adapterPath . $className . ".class.php")) {
+            include $adapterPath . $className . ".class.php";
         }
         //Initialize the adapter and class name
         $adapter = null;
-        $className = $adapterName;
         // Check to see adapter class exists inside of the file
         if (class_exists($className)) {
             $adapter = new $className($parameters, $this);
@@ -123,7 +127,7 @@ class AdapterManager {
      */
     public function createTemporaryAdapter(string $adapterName, array $parameters = array()) {
         if (array_key_exists($adapterName, $this->adapters)) {
-            $className = $adapterName . "adapter";
+            $className = $adapterName . 'Adapter';
             return new $className($parameters, $this);
         }
         return null;

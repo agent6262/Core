@@ -2,6 +2,8 @@
 
 /**
  * Class ControllerUtility Contains functions which are specific utility functions for controllers.
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 class ControllerUtility {
 
@@ -55,7 +57,8 @@ class ControllerUtility {
         $className = $controllerName;
         // Check to see if the controller class exists inside the file
         if (class_exists($className)) {
-            $controller = new $className($adapterManager, $controllerName, $templatePath, $templateStyle, $skinStyle);
+            $templateName = str_replace('Controller', 'Template', $controllerName);
+            $controller = new $className($adapterManager, $templateName, $templateStyle, $skinStyle, $templatePath);
         } else {
             throw new Exception("Controller '$controllerName' doesn't exist.");
         }

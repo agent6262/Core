@@ -2,8 +2,9 @@
 
 /**
  * Class Controller The web controller for templates.
- * Documented and edited by agent6262
- * @Authors probably spidEY, agent6262
+ * @author  spidEY
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 class Controller {
 
@@ -11,11 +12,6 @@ class Controller {
      * @var string The title of the controller.
      */
     private $controllerTitle = 'Default Page';
-
-    /**
-     * @var int The tab index of the controller. Only used if there are tabs on the page.
-     */
-    private $controllerTabIndex = 0;
 
     /**
      * @var string[] An array of all the valid keys that can be present in the parameter passed to the onPostReceived(array) method.
@@ -48,6 +44,11 @@ class Controller {
     private $baseUrl;
 
     /**
+     * @var bool Should The controller render with the main template.
+     */
+    private $useMainTemplate;
+
+    /**
      * Controller constructor.
      *
      * @param AdapterManager $adapterManager The adapter loading the controller.
@@ -63,9 +64,9 @@ class Controller {
         $this->templateStyle = $templateStyle;
         $this->templateSkin = $skinStyle;
         // Check to see if the template exists before creating it
-        if (file_exists($templatePath . $templateName . ".php")) {
+        if (file_exists($templatePath . $this->templateStyle . '/' . $templateName . ".php")) {
             $this->template = new Template($templateName, $templateStyle, $skinStyle);
-            $this->baseUrl = 'index.php?page=' . strtolower($templateName);
+            $this->baseUrl = 'index.php?page=' . str_replace('Template', '', $templateName);
         } else {
             throw new Exception("Template of '$templateName' not found.");
         }
@@ -83,20 +84,6 @@ class Controller {
      */
     public function setControllerTitle(string $controllerTitle) {
         $this->controllerTitle = $controllerTitle;
-    }
-
-    /**
-     * @return int The tab index of the controller. Only used if there are tabs on the page.
-     */
-    public function getControllerTabIndex() {
-        return $this->controllerTabIndex;
-    }
-
-    /**
-     * @param int $controllerTabIndex The tab index of the controller. Only used if there are tabs on the page.
-     */
-    public function setControllerTabIndex(int $controllerTabIndex) {
-        $this->controllerTabIndex = $controllerTabIndex;
     }
 
     /**
@@ -186,6 +173,20 @@ class Controller {
     }
 
     /**
+     * @return bool True if the controller should render with the main template.
+     */
+    public function useMainTemplate() {
+        return $this->useMainTemplate;
+    }
+
+    /**
+     * @param bool $useMainTemplate True if the controller should render with the main template.
+     */
+    public function setUseMainTemplate(bool $useMainTemplate) {
+        $this->useMainTemplate = $useMainTemplate;
+    }
+
+    /**
      * The primary function for the controller.
      */
     public function main() {
@@ -204,8 +205,8 @@ class Controller {
     }
 
     /**
-     * @param mixed $request The name of the ajax request that the user wants.
+     * @param string $request The name of the ajax request that the user wants.
      */
-    public function ajax(mixed $request) {
+    public function ajax(string $request) {
     }
 }

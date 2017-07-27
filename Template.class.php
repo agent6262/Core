@@ -2,8 +2,9 @@
 
 /**
  * Class Template Contains HTML code and some PHP for the rendered page.
- * Documented and edited by agent6262
- * @Authors spidEY, agent6262
+ * @author  spidEY
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 class Template {
 
@@ -60,7 +61,7 @@ class Template {
      * @param string $name  Name of the key.
      * @param mixed  $value Value to be stored.
      */
-    public function setData(string $name, mixed $value) {
+    public function setData(string $name, $value) {
         $this->args[$name] = $value;
     }
 
@@ -89,6 +90,6 @@ class Template {
      * Renders the template file.
      */
     public function render() {
-        include('templates/' . strtolower($this->templateStyle) . '/' . strtolower($this->fileName) . '.php');
+        include('templates/' . $this->templateStyle . '/' . $this->fileName . '.php');
     }
 }

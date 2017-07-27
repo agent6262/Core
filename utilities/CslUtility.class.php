@@ -2,6 +2,8 @@
 
 /**
  * Class CslUtility Contains functions that are closely related to comma separated lists.
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 class CslUtility {
 

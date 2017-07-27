@@ -2,7 +2,8 @@
 
 /**
  * Class HtmlComponent Provides a PHP Object-oriented way of constructing HTML elements.
- * @Author agent6262
+ * @author  agent6262
+ * @version 1.0.0.0
  */
 class HtmlComponent {
 
@@ -48,9 +49,12 @@ class HtmlComponent {
 
     /**
      * @param string $tag The HTML element tag.
+     *
+     * @return HtmlComponent this html component.
      */
     public function setTag(string $tag) {
         $this->tag = htmlspecialchars($tag);
+        return $this;
     }
 
     /**
@@ -63,18 +67,24 @@ class HtmlComponent {
     /**
      * @param string $key   The key of the attribute.
      * @param mixed  $value The value of the attribute for the HTML element.
+     *
+     * @return HtmlComponent this html component.
      */
-    public function setAttribute(string $key, mixed $value) {
+    public function setAttribute(string $key, $value) {
         $this->attributes[$key] = htmlspecialchars($value);
+        return $this;
     }
 
     /**
      * @param array $attributes The attributes for the HTML element.
+     *
+     * @return HtmlComponent this html component.
      */
     public function setAttributes(array $attributes) {
         foreach ($attributes as $key => $value) {
             $this->setAttribute($key, $value);
         }
+        return $this;
     }
 
     /**
@@ -86,9 +96,12 @@ class HtmlComponent {
 
     /**
      * @param mixed $value The value if any for the HTML element.
+     *
+     * @return HtmlComponent this html component.
      */
     public function setValue($value) {
         $this->value = htmlspecialchars($value);
+        return $this;
     }
 
     /**
@@ -100,9 +113,12 @@ class HtmlComponent {
 
     /**
      * @param HtmlComponent[] $subHtmlComponents A list of sub HTML elements.
+     *
+     * @return HtmlComponent this html component.
      */
     public function setSubHtmlComponents(array $subHtmlComponents) {
         $this->subHtmlComponents = $subHtmlComponents;
+        return $this;
     }
 
     /**
