@@ -13,7 +13,6 @@
  * @property boolean useApi
  * @property boolean useWeb
  * @author  agent6262
- * @version 1.0.0.0
  */
 class ConfigAdapter implements AdapterInterface {
 
@@ -77,7 +76,7 @@ class ConfigAdapter implements AdapterInterface {
      * @param string $name  The name of the key.
      * @param mixed  $value The new value for the key.
      */
-    public function __set(string $name, mixed $value) {
+    public function __set(string $name, $value) {
         $this->config[$name] = $value;
     }
 

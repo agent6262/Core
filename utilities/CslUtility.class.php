@@ -3,7 +3,6 @@
 /**
  * Class CslUtility Contains functions that are closely related to comma separated lists.
  * @author  agent6262
- * @version 1.0.0.0
  */
 class CslUtility {
 
@@ -14,7 +13,7 @@ class CslUtility {
      *
      * @return int Returns 1 if the pattern matched 0 if it did not, and false if an error occurred.
      */
-    public static function validateCSL(string $str) {
+    public static function validateNumericCsl(string $str) {
         return preg_match('/^[\d]+(,[\d]+)*$|^$/', $str);
     }
 
@@ -25,7 +24,7 @@ class CslUtility {
      *
      * @return int Returns 1 if the pattern matched 0 if it did not, and false if an error occurred.
      */
-    public static function validateStringCSL($str) {
+    public static function validateStringCsl($str) {
         return preg_match('/^[^\s,]+(,[^\s,]+)*$|^$/', $str);
     }
 
@@ -36,8 +35,8 @@ class CslUtility {
      *
      * @return array|null Returns an array if the string can be successfully validated.
      */
-    public static function arrayFromCSL(string $str) {
-        return !CslUtility::validateCSL($str) ? null : (strlen($str) > 0) ? explode(',', $str) : array();
+    public static function arrayFromCsl(string $str) {
+        return !CslUtility::validateNumericCsl($str) ? null : (strlen($str) > 0) ? explode(',', $str) : array();
     }
 
     /**
@@ -47,7 +46,7 @@ class CslUtility {
      *
      * @return array|null Returns an array if the string can be successfully validated.
      */
-    public static function arrayFromStringCSL(string $str) {
-        return !CslUtility::validateStringCSL($str) ? null : (strlen($str) > 0) ? explode(',', $str) : array();
+    public static function arrayFromStringCsl(string $str) {
+        return !CslUtility::validateStringCsl($str) ? null : (strlen($str) > 0) ? explode(',', $str) : array();
     }
 }

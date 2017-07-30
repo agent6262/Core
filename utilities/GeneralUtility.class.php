@@ -8,7 +8,6 @@
  * don't belong in any of them. It would be better for you to go clean your own sink (however much you may not want to)
  * than to add methods to this class. If at all possible, organize the code better and put them somewhere else.
  * @Author  agent6262
- * @version 1.0.0.0
  */
 class GeneralUtility {
 
@@ -42,11 +41,6 @@ class GeneralUtility {
      * @return bool false if the array does not contain a given element, true otherwise.
      */
     public static function validateArray(array $array, array $keyCheck) {
-        foreach ($keyCheck as $key) {
-            if (!array_key_exists($key, $array)) {
-                return false;
-            }
-        }
-        return true;
+        return empty(array_diff_key(array_flip($keyCheck), $array));
     }
 }

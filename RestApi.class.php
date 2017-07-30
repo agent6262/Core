@@ -1,25 +1,48 @@
 <?php
 
 /**
- * All REST api functions must implement this.
+ * All REST API functions must implement this.
  * @author  agent6262
- * @version 1.0.0.0
  */
 interface HandlerInterface {
-    public function __construct(string $method, array $args, mixed $file, AdapterManager $adapterManager);
+    public function __construct(string $method, array $args, string $file, AdapterManager $adapterManager);
 
     /**
-     * @return mixed Api endpoint return call.
+     * @return mixed API endpoint return call.
      */
     public function handle();
 }
 
 /**
- * Class RestApi Handles all RESTful api requests.
+ * Class RestApi Handles all RESTful API requests.
  * @author  agent6262
- * @version 1.0.0.0
  */
 class RestApi {
+
+    /**
+     * Extended method request type.
+     */
+    const HTTP_X_HTTP_METHOD = 'HTTP_X_HTTP_METHOD';
+
+    /**
+     * HTTP Method type.
+     */
+    const GET = 'GET';
+
+    /**
+     * HTTP Method type.
+     */
+    const POST = 'POST';
+
+    /**
+     * HTTP Method type.
+     */
+    const PUT = 'PUT';
+
+    /**
+     * HTTP Method type.
+     */
+    const DELETE = 'DELETE';
 
     /**
      * @var string The HTTP method this request was made in, either GET, POST, PUT or DELETE
@@ -58,17 +81,17 @@ class RestApi {
         $this->args = $request;
         $this->method = $_SERVER['REQUEST_METHOD'];
         // Check For X HTTP request method
-        if ($this->method == 'POST' && array_key_exists('HTTP_X_HTTP_METHOD', $_SERVER)) {
-            if ($_SERVER['HTTP_X_HTTP_METHOD'] == 'DELETE') {
-                $this->method = 'DELETE';
-            } else if ($_SERVER['HTTP_X_HTTP_METHOD'] == 'PUT') {
-                $this->method = 'PUT';
+        if ($this->method == self::POST && array_key_exists(self::HTTP_X_HTTP_METHOD, $_SERVER)) {
+            if ($_SERVER[self::HTTP_X_HTTP_METHOD] == self::DELETE) {
+                $this->method = self::DELETE;
+            } else if ($_SERVER[self::HTTP_X_HTTP_METHOD] == self::PUT) {
+                $this->method = self::PUT;
             } else {
                 throw new Exception("Unexpected Header");
             }
         }
         // Set file input for PUT request
-        if ($this->method == 'PUT') {
+        if ($this->method == self::PUT) {
             $this->file = file_get_contents("php://input");
         }
     }
@@ -78,11 +101,14 @@ class RestApi {
      * @param AdapterManager $adapterManager The adapter reference for the api endpoint.
      *
      * @return string The json encoded data.
+     * @throws Exception if the endpoint file id not found.
      */
-    public function processAPI(string $apiPath = "api/", AdapterManager $adapterManager = null) {
+    public function processApi(string $apiPath = "api/", AdapterManager $adapterManager = null) {
         // Check to see if the api file exists before including it
         if (file_exists($apiPath . $this->endpoint . ".php")) {
             include_once $apiPath . $this->endpoint . ".php";
+        } else {
+            throw new Exception("Unable to find api file");
         }
         // Initialize the api object and class name
         $apiObject = null;
@@ -106,7 +132,7 @@ class RestApi {
      *
      * @return string The json encoded data.
      */
-    private function _response(mixed $data, $status = 200) {
+    private function _response($data, $status = 200) {
         header("HTTP/1.1 " . $status . " " . $this->_requestStatus($status));
         return json_encode($data);
     }

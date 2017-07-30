@@ -4,7 +4,6 @@
  * Class Template Contains HTML code and some PHP for the rendered page.
  * @author  spidEY
  * @author  agent6262
- * @version 1.0.0.0
  */
 class Template {
 

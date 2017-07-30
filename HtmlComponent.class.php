@@ -3,7 +3,6 @@
 /**
  * Class HtmlComponent Provides a PHP Object-oriented way of constructing HTML elements.
  * @author  agent6262
- * @version 1.0.0.0
  */
 class HtmlComponent {
 
@@ -45,16 +44,6 @@ class HtmlComponent {
      */
     public function getTag() {
         return $this->tag;
-    }
-
-    /**
-     * @param string $tag The HTML element tag.
-     *
-     * @return HtmlComponent this html component.
-     */
-    public function setTag(string $tag) {
-        $this->tag = htmlspecialchars($tag);
-        return $this;
     }
 
     /**
@@ -132,7 +121,6 @@ class HtmlComponent {
             echo $key, '="', $value, '" ';
         }
         echo '>';
-
         if (empty($this->subHtmlComponents)) {
             // Print value
             echo $this->value;

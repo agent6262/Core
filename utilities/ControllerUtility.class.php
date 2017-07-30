@@ -3,7 +3,6 @@
 /**
  * Class ControllerUtility Contains functions which are specific utility functions for controllers.
  * @author  agent6262
- * @version 1.0.0.0
  */
 class ControllerUtility {
 
@@ -47,7 +46,7 @@ class ControllerUtility {
      *              If the a controller with the given name does not exist.
      *              If The controller does not extend Controller and does not implement ControllerInterface.
      */
-    public static function loadController(string $controllerName, AdapterManager $adapterManager, string $templateStyle, string $skinStyle, string $controllerPath = "controllers/", $templatePath = "templates/") {
+    public static function loadController(string $controllerName, AdapterManager $adapterManager, string $templateStyle, string $skinStyle, string $controllerPath = "controllers/", string $templatePath = "templates/") {
         // Check to see if the controller exists before including it
         if (file_exists($controllerPath . $controllerName . ".class.php")) {
             include_once $controllerPath . $controllerName . ".class.php";
@@ -64,7 +63,7 @@ class ControllerUtility {
         }
         // Check to see if the controller implements the ControllerInterface
         if (!$controller instanceof Controller) {
-            throw new Exception('You can only load Controllers that extend the Controller.');
+            throw new Exception('You can only load Controllers that extend the Controller class.');
         }
         // Return controller
         return $controller;

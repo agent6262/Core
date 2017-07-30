@@ -3,7 +3,6 @@
 /**
  * Class Core A static class that should be called from the project level index.php.
  * @author  agent6262
- * @version 1.0.0.0
  */
 class Core {
 
@@ -26,7 +25,6 @@ class Core {
 /**
  * The web portion of core.
  * @author  agent6262
- * @version 1.0.0.0
  */
 class Web {
 
@@ -157,11 +155,10 @@ class Web {
 }
 
 /**
- * The REST api portion of core.
+ * The REST API portion of core.
  * @author  agent6262
- * @version 1.0.0.0
  */
-class API {
+class Api {
 
     /**
      * @param ConfigAdapter $configAdapter The registered configuration adapter.
@@ -169,11 +166,11 @@ class API {
      * @return bool True if the api module is enabled false otherwise.
      */
     public static function initApiModule(ConfigAdapter $configAdapter) {
-        // Check to make sure web module is enabled
+        // Check to make sure API module is enabled
         if (!$configAdapter->useApi) {
             return false;
         }
-        // Define the web module and error displaying
+        // Define the API module and error displaying
         define('CORE_API', 1);
         // Set error logging before anything else
         ini_set('log_errors', $configAdapter->logErrors);

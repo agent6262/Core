@@ -4,19 +4,18 @@
  * Class Controller The web controller for templates.
  * @author  spidEY
  * @author  agent6262
- * @version 1.0.0.0
  */
-class Controller {
+abstract class Controller {
 
     /**
      * @var string The title of the controller.
      */
-    private $controllerTitle = 'Default Page';
+    protected $controllerTitle = 'Default Page';
 
     /**
      * @var string[] An array of all the valid keys that can be present in the parameter passed to the onPostReceived(array) method.
      */
-    private $controllerPostData = array();
+    protected $controllerPostData = array();
 
     /**
      * @var string The desired template style of the template.
@@ -46,7 +45,7 @@ class Controller {
     /**
      * @var bool Should The controller render with the main template.
      */
-    private $useMainTemplate;
+    protected $useMainTemplate;
 
     /**
      * Controller constructor.
@@ -80,26 +79,11 @@ class Controller {
     }
 
     /**
-     * @param string $controllerTitle The title of the controller.
-     */
-    public function setControllerTitle(string $controllerTitle) {
-        $this->controllerTitle = $controllerTitle;
-    }
-
-    /**
      * @return string[] An array of all the valid keys that can be present in the parameter passed to the
      * onPostReceived(array) method.
      */
     public function getControllerPostData() {
         return $this->controllerPostData;
-    }
-
-    /**
-     * @param string[] $controllerPostData An array of all the valid keys that can be present in the parameter passed
-     *                                     to the onPostReceived(array) method.
-     */
-    public function setControllerPostData(array $controllerPostData) {
-        $this->controllerPostData = $controllerPostData;
     }
 
     /**
@@ -180,33 +164,22 @@ class Controller {
     }
 
     /**
-     * @param bool $useMainTemplate True if the controller should render with the main template.
-     */
-    public function setUseMainTemplate(bool $useMainTemplate) {
-        $this->useMainTemplate = $useMainTemplate;
-    }
-
-    /**
      * The primary function for the controller.
      */
-    public function main() {
-    }
+    public abstract function main();
 
     /**
      * @param array $data The data array of post variables.
      */
-    public function onPostReceived(array $data) {
-    }
+    public abstract function onPostReceived(array $data);
 
     /**
      * @param string $action The name of the action the user preformed.
      */
-    public function onUserAction(string $action) {
-    }
+    public abstract function onUserAction(string $action);
 
     /**
      * @param string $request The name of the ajax request that the user wants.
      */
-    public function ajax(string $request) {
-    }
+    public abstract function ajax(string $request);
 }

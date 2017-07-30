@@ -3,7 +3,6 @@
 /**
  * All adapters must implement this interface in order to be used.
  * @author  agent6262
- * @version 1.0.0.0
  */
 interface AdapterInterface {
     public function __construct(array $parameters, AdapterManager $adapterManager);
@@ -13,7 +12,6 @@ interface AdapterInterface {
  * Adapters are used to interface with other applications that are not native to the project.
  * Used to register and get adapters. Note that this class is a singleton.
  * @author  agent6262
- * @version 1.0.0.0
  */
 class AdapterManager {
 
@@ -65,6 +63,9 @@ class AdapterManager {
      */
     public function registerAdapter(string $className, string $adapterPath = "adapters/", array $parameters = array()) {
         // Check if adapterName is in the registered adapters list, if so throw Exception
+        if (!array_key_exists('regName', $parameters)) {
+            throw new Exception("Adapter parameter 'regName' must be specified.");
+        }
         $adapterName = $parameters['regName'];
         if (array_key_exists($adapterName, $this->adapters)) {
             throw new Exception("Adapter '$adapterName' is already registered.");
