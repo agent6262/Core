@@ -35,7 +35,7 @@ class CslUtility {
      *
      * @return array|null Returns an array if the string can be successfully validated.
      */
-    public static function arrayFromCsl(string $str) {
+    public static function arrayFromNumericCsl(string $str) {
         return !CslUtility::validateNumericCsl($str) ? null : (strlen($str) > 0) ? explode(',', $str) : array();
     }
 

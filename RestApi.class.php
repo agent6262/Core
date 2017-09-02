@@ -55,7 +55,7 @@ class RestApi {
     protected $endpoint = '';
 
     /**
-     * @var array Any additional URI components after the endpoint have been removed. eg: /<endpoint>/<arg0>/<arg1>
+     * @var array Any additional URI components after the index has filtered it.
      */
     protected $args = Array();
 
