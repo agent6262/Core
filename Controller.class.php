@@ -2,8 +2,8 @@
 
 /**
  * Class Controller The web controller for templates.
- * @author  spidEY
- * @author  agent6262
+ * @author spideyfusion
+ * @author agent6262
  */
 abstract class Controller {
 

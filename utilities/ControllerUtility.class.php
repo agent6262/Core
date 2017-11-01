@@ -2,7 +2,7 @@
 
 /**
  * Class ControllerUtility Contains functions which are specific utility functions for controllers.
- * @author  agent6262
+ * @author agent6262
  */
 class ControllerUtility {
 

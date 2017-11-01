@@ -2,7 +2,7 @@
 
 /**
  * Class StorageAdapter Creates and manages different types of storage for php.
- * @author  agent6262
+ * @author agent6262
  */
 class StorageAdapter implements AdapterInterface {
 
@@ -40,6 +40,9 @@ class StorageAdapter implements AdapterInterface {
     }
 }
 
+/**
+ * Interface StorageInterface all types of storage's for php should implement this.
+ */
 interface StorageInterface {
 
     /**

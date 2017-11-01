@@ -2,7 +2,7 @@
 
 /**
  * All REST API functions must implement this.
- * @author  agent6262
+ * @author agent6262
  */
 interface HandlerInterface {
     public function __construct(string $method, array $args, string $file, AdapterManager $adapterManager);
@@ -15,7 +15,7 @@ interface HandlerInterface {
 
 /**
  * Class RestApi Handles all RESTful API requests.
- * @author  agent6262
+ * @author agent6262
  */
 class RestApi {
 

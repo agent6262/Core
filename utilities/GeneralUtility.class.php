@@ -7,7 +7,7 @@
  * for them. Also, PLEASE check the other utility classes to make sure the method(s) you're considering adding here
  * don't belong in any of them. It would be better for you to go clean your own sink (however much you may not want to)
  * than to add methods to this class. If at all possible, organize the code better and put them somewhere else.
- * @Author  agent6262
+ * @Author agent6262
  */
 class GeneralUtility {
 

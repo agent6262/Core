@@ -2,7 +2,7 @@
 
 /**
  * Class HtmlComponent Provides a PHP Object-oriented way of constructing HTML elements.
- * @author  agent6262
+ * @author agent6262
  */
 class HtmlComponent {
 

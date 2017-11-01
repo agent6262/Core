@@ -12,7 +12,7 @@
  * @property string  templateCookie
  * @property boolean useApi
  * @property boolean useWeb
- * @author  agent6262
+ * @author agent6262
  */
 class ConfigAdapter implements AdapterInterface {
 

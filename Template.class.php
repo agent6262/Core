@@ -2,8 +2,8 @@
 
 /**
  * Class Template Contains HTML code and some PHP for the rendered page.
- * @author  spidEY
- * @author  agent6262
+ * @author spideyfusion
+ * @author agent6262
  */
 class Template {
 

@@ -7,7 +7,7 @@ const CORE_VERSION = '0.1.0.0';
 
 /**
  * Class AdapterList Holds a list of all adapters that are default and explicitly loaded.
- * @author  agent6262
+ * @author agent6262
  */
 abstract class AdapterList {
 

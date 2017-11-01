@@ -1,6 +1,6 @@
 ![alt text](http://i.imgur.com/SLiDgDf.png "Core Logo")
 
-# Introduction
+# Introduction [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 Welcome to Core, a module based PHP library. Core is designed to be built on top of and utilized from the ground up. 
 Core is not designed to be a standalone PHP application and will not function as one. Core provides modules for you to 

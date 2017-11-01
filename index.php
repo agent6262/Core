@@ -2,7 +2,7 @@
 
 /**
  * Class Core A static class that should be called from the project level index.php.
- * @author  agent6262
+ * @author agent6262
  */
 class Core {
 
@@ -24,7 +24,7 @@ class Core {
 
 /**
  * The web portion of core.
- * @author  agent6262
+ * @author agent6262
  */
 class Web {
 

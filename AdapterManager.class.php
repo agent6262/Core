@@ -2,7 +2,7 @@
 
 /**
  * All adapters must implement this interface in order to be used.
- * @author  agent6262
+ * @author agent6262
  */
 interface AdapterInterface {
     public function __construct(array $parameters, AdapterManager $adapterManager);
@@ -11,7 +11,7 @@ interface AdapterInterface {
 /**
  * Adapters are used to interface with other applications that are not native to the project.
  * Used to register and get adapters. Note that this class is a singleton.
- * @author  agent6262
+ * @author agent6262
  */
 class AdapterManager {
 
